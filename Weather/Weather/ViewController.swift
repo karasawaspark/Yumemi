@@ -45,5 +45,17 @@ class ViewController: UIViewController {
         WeatherImageView.image = UIImage(named: imageName)
         WeatherImageView.tintColor = tintColor
     }
+    
+    @IBAction func closeButton(_ sender: Any) {
+        self.dismiss(animated: true,completion: nil)
+    }
 }
-//git練習
+
+/*
+ 特に指示を与えなくても、２つ目の画面を閉じるたら１つ目の画面が自然と出てくる仕様になっている。そのため今回の課題は、
+ ①ボタンを押したら２つ目の画面を閉じる。（自動的に１つ目の画面に遷移する）
+ ②１つ目の画面は画面が表示したら２つ目の画面に遷移するように指示を与える（ViewDidApperを使用）。
+ ③２つ目の画面に遷移。ボタンを押したら〜、、
+ という流れが完成する
+ */
+
