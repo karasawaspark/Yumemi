@@ -22,29 +22,27 @@ class ViewController: UIViewController {
     }
     
     func getWeatherImage() {
+        
         let responseWeatherStr = YumemiWeather.fetchWeatherCondition()
+        
+        var imageName = "sunny"
+        var tintColor = UIColor.red
+        
         switch responseWeatherStr {
-        case "sunny" :
-            WeatherImageView.image = UIImage(named:responseWeatherStr)?.withRenderingMode(.alwaysTemplate)
-            self.WeatherImageView.tintColor = .red
-        case "cloudy" :
-            WeatherImageView.image = UIImage(named:responseWeatherStr)?.withRenderingMode(.alwaysTemplate)
-            self.WeatherImageView.tintColor = .gray
-        case "rainy" :
-            WeatherImageView.image = UIImage(named:responseWeatherStr)?.withRenderingMode(.alwaysTemplate)
-            self.WeatherImageView.tintColor = .blue
+        case "sunny":
+            imageName = "sunny"
+            tintColor = UIColor.red
+        case "cloudy":
+            imageName = "cloudy"
+            tintColor = UIColor.gray
+        case "rainy":
+            imageName = "rainy"
+            tintColor = UIColor.blue
         default:
             break
         }
+        
+        WeatherImageView.image = UIImage(named: imageName)
+        WeatherImageView.tintColor = tintColor
     }
 }
-            //
-            //        func drowImageView () {
-            //            WeatherImageView.image = UIImage(named: aaa)
-            //        }
-            //
-            //        func colorImageView () {
-            //            WeatherImageView.image = UIImage(named: aaa)?.withRenderingMode(<#T##renderingMode: UIImage.RenderingMode##UIImage.RenderingMode#>)
-            
-            
- 
