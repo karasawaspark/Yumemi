@@ -76,7 +76,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Close"/>
                                 <connections>
-                                    <action selector="closeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cec-mJ-iGf"/>
+                                    <action selector="closeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xpo-r2-OoZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9I-9T-2eY">

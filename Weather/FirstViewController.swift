@@ -8,9 +8,6 @@
 import UIKit
 
 class FirstViewController: UIViewController {
-    /*FirstViewControllerはUIViewControllerの子クラス
-    
-     */
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +16,7 @@ class FirstViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+
         super.viewDidAppear(animated)
         self.performSegue(withIdentifier: "toMain", sender: self)
     }

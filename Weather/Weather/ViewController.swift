@@ -6,29 +6,32 @@
 //
 
 import UIKit
-import YumemiWeather
+//import YumemiWeather
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,YumemiDelegate {
+    
+    let yumemitenki = YumemiTenki()
     
     @IBOutlet weak var WeatherImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        yumemitenki.delegate = self
     }
-    
     
     @IBAction func WeatherChange(_ sender: Any) {
-        getWeatherImage()
+        yumemitenki.setYumemiWeather()
     }
     
-    func getWeatherImage() {
-        
-        let responseWeatherStr = YumemiWeather.fetchWeatherCondition()
-        
+    @IBAction func closeButton(_ sender: Any) {
+        self.dismiss(animated: true,completion: nil)
+    }
+    
+    func setWeatherImage(type: String) {
         var imageName = "sunny"
         var tintColor = UIColor.red
         
-        switch responseWeatherStr {
+        switch type {
         case "sunny":
             imageName = "sunny"
             tintColor = UIColor.red
@@ -46,16 +49,5 @@ class ViewController: UIViewController {
         WeatherImageView.tintColor = tintColor
     }
     
-    @IBAction func closeButton(_ sender: Any) {
-        self.dismiss(animated: true,completion: nil)
-    }
 }
-
-/*
- 特に指示を与えなくても、２つ目の画面を閉じるたら１つ目の画面が自然と出てくる仕様になっている。そのため今回の課題は、
- ①ボタンを押したら２つ目の画面を閉じる。（自動的に１つ目の画面に遷移する）
- ②１つ目の画面は画面が表示したら２つ目の画面に遷移するように指示を与える（ViewDidApperを使用）。
- ③２つ目の画面に遷移。ボタンを押したら〜、、
- という流れが完成する
- */
 
