@@ -8,7 +8,7 @@
 import UIKit
 //import YumemiWeather
 
-class ViewController: UIViewController,YumemiDelegate {
+class ViewController: UIViewController {
     
     let yumemitenki = YumemiTenki()
     
@@ -16,6 +16,7 @@ class ViewController: UIViewController,YumemiDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         yumemitenki.delegate = self
     }
     
@@ -26,28 +27,35 @@ class ViewController: UIViewController,YumemiDelegate {
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true,completion: nil)
     }
-    
-    func setWeatherImage(type: String) {
-        var imageName = "sunny"
-        var tintColor = UIColor.red
-        
-        switch type {
-        case "sunny":
-            imageName = "sunny"
-            tintColor = UIColor.red
-        case "cloudy":
-            imageName = "cloudy"
-            tintColor = UIColor.gray
-        case "rainy":
-            imageName = "rainy"
-            tintColor = UIColor.blue
-        default:
-            break
-        }
-        
-        WeatherImageView.image = UIImage(named: imageName)
-        WeatherImageView.tintColor = tintColor
-    }
-    
 }
 
+extension ViewController:YumemiDelegate {
+       
+        func setWeatherImage(type: String) {
+            var imageName = "sunny"
+            var tintColor = UIColor.red
+            
+            switch type {
+            case "sunny":
+                imageName = "sunny"
+                tintColor = UIColor.red
+            case "cloudy":
+                imageName = "cloudy"
+                tintColor = UIColor.gray
+            case "rainy":
+                imageName = "rainy"
+                tintColor = UIColor.blue
+            default:
+                break
+            }
+            
+            WeatherImageView.image = UIImage(named: imageName)
+            WeatherImageView.tintColor = tintColor
+        }
+    }
+
+/* func setWeatherError(alertMessage: String) {
+//アラートのタイトルは「確認」などにしてmessageに内容を入れるのが一般的
+
+let alert = UIAlertController(title: "確認", message: alertMessage, preferredStyle: alert)
+/*
