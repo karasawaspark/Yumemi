@@ -30,7 +30,20 @@ class ViewController: UIViewController {
 }
 
 extension ViewController:YumemiDelegate {
-       
+    func setErrorMessage(alert: String) {
+        let alertController = UIAlertController(title: alert, message: "エラー", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "閉じる", style: .default, handler: nil))
+        present(alertController, animated: false, completion: nil)
+    }
+    
+/*
+ 1行目,alertControllerにダイアログボックスの情報を記載（preferredStyleとは・・・？）
+ 2行目,次のアクションを記載（今回のケースは"閉じる"）
+ 3行目,表示アニメーション形式を記載
+ ※titleはダイアログに入る文言が入るが、引数をそのまま入力できる。
+ ※handlerはフォントのようなレイアウトではなく、関数で置き換えられるような機能的な情報を追加する際に使う。特にない場合はnilを使う
+ */
+    
         func setWeatherImage(type: String) {
             var imageName = "sunny"
             var tintColor = UIColor.red
@@ -53,9 +66,3 @@ extension ViewController:YumemiDelegate {
             WeatherImageView.tintColor = tintColor
         }
     }
-
-/* func setWeatherError(alertMessage: String) {
-//アラートのタイトルは「確認」などにしてmessageに内容を入れるのが一般的
-
-let alert = UIAlertController(title: "確認", message: alertMessage, preferredStyle: alert)
-/*

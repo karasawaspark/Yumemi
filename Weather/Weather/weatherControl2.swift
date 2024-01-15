@@ -11,19 +11,23 @@ import YumemiWeather
 
 protocol YumemiDelegate {
     func setWeatherImage(type:String)
+    func setErrorMessage(alert:String)
 }
-//Delegateを実行するためprotocolを記述（Delegateは別のViewControllerを渡すことができるクラスみたいなもの）
-//setWeatherImageを実行（setWeatherImageというメソッドを実行。別画面のためDelegateを用いている）
-
+/*Delegateを実行するためprotocolを記述（Delegateは別のViewControllerを渡すことができるクラスみたいなもの）
+*/
 
 class YumemiTenki {
     var delegate: YumemiDelegate?
     
-    func setYumemiWeather(){
-        let responseWeatherStr = YumemiWeather.fetchWeatherCondition()
-        delegate?.setWeatherImage(type: responseWeatherStr)
-/*処理を任されるクラス
- 
-*/
+    func setYumemiWeather() {
+        do{
+            let responseWeatherStr = try YumemiWeather.fetchWeatherCondition(at: "")
+            //ある一定の確率でエラーを出すAPIを読み込んでいる
+            self.delegate?.setWeatherImage(type: responseWeatherStr)
+        }catch YumemiWeatherError.unknownError{
+            self.delegate?.setErrorMessage(alert: "不明なエラーが発生しました")
+        }catch let error{
+            print(error)
         }
+    }
 }
