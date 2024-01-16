@@ -103,6 +103,8 @@
                     <navigationItem key="navigationItem" id="29R-GC-OFy"/>
                     <connections>
                         <outlet property="WeatherImageView" destination="hlL-ou-fxw" id="YKo-EY-WDa"/>
+                        <outlet property="maxTempLabel" destination="3N1-qF-QKo" id="RYq-GV-lbZ"/>
+                        <outlet property="minTempLabel" destination="sUK-2X-mdE" id="0dp-40-N4Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
