@@ -18,9 +18,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var WeatherImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         yumemitenki.delegate = self
+        
+        NotificationCenter.default.addObserver(
+            self,selector: #selector(road),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
     }
+       
+    @objc func road() {
+                yumemitenki.setYumemiWeather()
+        }
+    
     
     @IBAction func WeatherChange(_ sender: Any) {
         yumemitenki.setYumemiWeather()
@@ -30,6 +41,7 @@ class ViewController: UIViewController {
         self.dismiss(animated: true,completion: nil)
     }
 }
+
 
 extension ViewController:YumemiDelegate {
     func setWeatherTempMax(max: Int) {

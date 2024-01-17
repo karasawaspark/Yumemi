@@ -22,6 +22,7 @@ protocol YumemiDelegate {
     func setWeatherTempMin(min: Int)
 }
 
+
 class YumemiTenki {
     var delegate: YumemiDelegate?
     
