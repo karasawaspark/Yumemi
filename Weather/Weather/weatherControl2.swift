@@ -10,6 +10,11 @@ import YumemiWeather
 import Foundation
 //YumemiWeatherのAPIをインポートした
 
+struct infoWeather: Codable{
+    var area:String;
+    var date:String;
+}
+
 protocol YumemiDelegate {
     func setWeatherImage(type: String)
     func setErrorMessage(alert: String)
@@ -19,16 +24,20 @@ protocol YumemiDelegate {
 
 class YumemiTenki {
     var delegate: YumemiDelegate?
-    let requestJson = """
-   {
-    "area":"tokyo",
-   "date":"2020-04-01T12:00:00+09:00"
-   }
-   """
+    
     func setYumemiWeather() {
         do{
-            let responseWeatherCondition = try YumemiWeather.fetchWeather(requestJson)
+            let returnJson = infoWeather(area: "Tokyo", date: "2020-04-01T12:00:00+09:00")
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(returnJson)
             
+            guard let requestJson = String(data: jsonData , encoding: .utf8)
+                    //jsonを使う場合はエラーが発生しやすいのでこまめに使う
+            else{
+                return
+            }
+            
+            let responseWeatherCondition = try YumemiWeather.fetchWeather(requestJson)
             guard let yumemiJsonConvert = responseWeatherCondition.data(using: .utf8),
                   let items = try JSONSerialization.jsonObject(with: yumemiJsonConvert, options: []) as? [String: Any],
                   let maxTemp = items["max_temperature"] as? Int,

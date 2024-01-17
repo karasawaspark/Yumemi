@@ -13,14 +13,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
     
-    
     let yumemitenki = YumemiTenki()
     
     @IBOutlet weak var WeatherImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+
         yumemitenki.delegate = self
     }
     
