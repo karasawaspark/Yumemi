@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var minTempLabel: UILabel!
     @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     let yumemitenki = YumemiTenki()
     
@@ -19,21 +20,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        indicator.hidesWhenStopped = true
+        
         yumemitenki.delegate = self
         
         NotificationCenter.default.addObserver(
             self,selector: #selector(road),
-            name: UIApplication.willEnterForegroundNotification,
-            object: nil
-        )
+            name: UIApplication.willEnterForegroundNotification,object: nil)
     }
-       
+    
     @objc func road() {
-                yumemitenki.setYumemiWeather()
-        }
+        yumemitenki.setYumemiWeather()
+    }
     
-    
-    @IBAction func WeatherChange(_ sender: Any) {
+    @IBAction func WeatherReloadButton(_ sender: Any) {
+        self.indicator.startAnimating()
         yumemitenki.setYumemiWeather()
     }
     
@@ -42,20 +43,26 @@ class ViewController: UIViewController {
     }
 }
 
-
 extension ViewController:YumemiDelegate {
+    
     func setWeatherTempMax(max: Int) {
-           self.maxTempLabel.text = String(max)
+        DispatchQueue.main.async {
+            self.maxTempLabel.text = String(max)
+        }
     }
-
+    
     func setWeatherTempMin(min: Int) {
-        self.minTempLabel.text = String(min)
+        DispatchQueue.main.async {
+            self.minTempLabel.text = String(min)
+        }
     }
     
     func setErrorMessage(alert: String) {
-        let alertController = UIAlertController(title: alert, message: "エラー", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "閉じる", style: .default, handler: nil))
-        present(alertController, animated: false, completion: nil)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: alert, message: "エラー", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "閉じる", style: .default, handler: nil))
+            self.present(alertController, animated: false, completion: nil)
+        }
     }
     
     func setWeatherImage(type: String) {
@@ -76,7 +83,10 @@ extension ViewController:YumemiDelegate {
             break
         }
         
-        WeatherImageView.image = UIImage(named: imageName)
-        WeatherImageView.tintColor = tintColor
+        DispatchQueue.main.async {
+            self.WeatherImageView.image = UIImage(named: imageName)
+            self.WeatherImageView.tintColor = tintColor
+            self.indicator.stopAnimating()
+        }
     }
 }

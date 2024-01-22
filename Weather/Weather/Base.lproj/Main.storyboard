@@ -84,25 +84,31 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Reload"/>
                                 <connections>
-                                    <action selector="WeatherChange:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eFM-Ke-ooS"/>
+                                    <action selector="WeatherReloadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mJH-uW-5nh"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="BIy-Gk-T3F">
+                                <rect key="frame" x="186.66666666666666" y="561.33333333333337" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="2x9-Su-Uxz" firstAttribute="centerX" secondItem="sUK-2X-mdE" secondAttribute="centerX" id="4F9-Rm-iHt"/>
                             <constraint firstItem="2x9-Su-Uxz" firstAttribute="top" secondItem="APR-G6-7fA" secondAttribute="bottom" constant="80" id="PrE-e0-3JE"/>
+                            <constraint firstItem="BIy-Gk-T3F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rli-DN-gqV"/>
                             <constraint firstItem="APR-G6-7fA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UgX-il-1IF"/>
                             <constraint firstItem="r9I-9T-2eY" firstAttribute="top" secondItem="APR-G6-7fA" secondAttribute="bottom" constant="80" id="fPM-Ya-kbv"/>
                             <constraint firstItem="APR-G6-7fA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="iLh-b5-zZZ"/>
                             <constraint firstItem="r9I-9T-2eY" firstAttribute="centerX" secondItem="3N1-qF-QKo" secondAttribute="centerX" id="kQr-Cf-6da"/>
+                            <constraint firstItem="BIy-Gk-T3F" firstAttribute="top" secondItem="APR-G6-7fA" secondAttribute="bottom" constant="30" id="qCs-Ao-aSL"/>
                             <constraint firstItem="APR-G6-7fA" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="tfY-ge-bae"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="29R-GC-OFy"/>
                     <connections>
                         <outlet property="WeatherImageView" destination="hlL-ou-fxw" id="YKo-EY-WDa"/>
+                        <outlet property="indicator" destination="BIy-Gk-T3F" id="NUi-YV-1VO"/>
                         <outlet property="maxTempLabel" destination="3N1-qF-QKo" id="RYq-GV-lbZ"/>
                         <outlet property="minTempLabel" destination="sUK-2X-mdE" id="0dp-40-N4Y"/>
                     </connections>
