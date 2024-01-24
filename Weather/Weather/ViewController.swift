@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
-    let yumemitenki = YumemiTenki()
+    let weatherDatail = WeatherDetail()
     
     @IBOutlet weak var WeatherImageView: UIImageView!
     override func viewDidLoad() {
@@ -22,39 +22,38 @@ class ViewController: UIViewController {
         
         indicator.hidesWhenStopped = true
         
-        yumemitenki.delegate = self
-        
         NotificationCenter.default.addObserver(
             self,selector: #selector(road),
             name: UIApplication.willEnterForegroundNotification,object: nil)
     }
     
+    
+    func reloadWeather() {
+        self.indicator.startAnimating()
+        weatherDatail.yumemiWeather { result in
+            
+            self.indicator.stopAnimating()
+            
+            switch result {
+            case .success(let (max,min,weather)):
+                self.setWeatherInfo(max: max, min: min, weather: weather)
+            case .failure(let error):
+                self.setErrorMessage(alert:"Error\(error.localizedDescription)")
+            }
+        }
+    }
+  
     @objc func road() {
-        yumemitenki.setYumemiWeather()
+       // weatherDatail.setYumemiWeather()
     }
     
     @IBAction func WeatherReloadButton(_ sender: Any) {
-        self.indicator.startAnimating()
-        yumemitenki.setYumemiWeather()
+        reloadWeather()
     }
-    
+        
+        
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true,completion: nil)
-    }
-}
-
-extension ViewController:YumemiDelegate {
-    
-    func setWeatherTempMax(max: Int) {
-        DispatchQueue.main.async {
-            self.maxTempLabel.text = String(max)
-        }
-    }
-    
-    func setWeatherTempMin(min: Int) {
-        DispatchQueue.main.async {
-            self.minTempLabel.text = String(min)
-        }
     }
     
     func setErrorMessage(alert: String) {
@@ -65,11 +64,11 @@ extension ViewController:YumemiDelegate {
         }
     }
     
-    func setWeatherImage(type: String) {
+    func setWeatherInfo(max:Int,min:Int,weather:String) {
         var imageName = "sunny"
         var tintColor = UIColor.red
         
-        switch type {
+        switch weather {
         case "sunny":
             imageName = "sunny"
             tintColor = UIColor.red
@@ -86,6 +85,8 @@ extension ViewController:YumemiDelegate {
         DispatchQueue.main.async {
             self.WeatherImageView.image = UIImage(named: imageName)
             self.WeatherImageView.tintColor = tintColor
+            self.maxTempLabel.text = String(max)
+            self.minTempLabel.text = String(min)
             self.indicator.stopAnimating()
         }
     }
