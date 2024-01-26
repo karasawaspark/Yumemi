@@ -30,16 +30,28 @@ class ViewController: UIViewController {
     
     func reloadWeather() {
         self.indicator.startAnimating()
-        weatherDatail.yumemiWeather { result in
-            
+        
+        Task {
+            let result = await weatherDatail.yumemiWeather()
             self.indicator.stopAnimating()
-            
+
             switch result {
             case .success(let (max,min,weather)):
                 self.setWeatherInfo(max: max, min: min, weather: weather)
             case .failure(let error):
                 self.setErrorMessage(alert:"Error\(error.localizedDescription)")
             }
+            // 後の処理
+//            return weatherDatail.yumemiWeather{ result in
+//
+//                self.indicator.stopAnimating()
+//                switch result {
+//                case .success(let (max,min,weather)):
+//                    self.setWeatherInfo(max: max, min: min, weather: weather)
+//                case .failure(let error):
+//                    self.setErrorMessage(alert:"Error\(error.localizedDescription)")
+//                }
+//            }
         }
     }
   
@@ -57,13 +69,15 @@ class ViewController: UIViewController {
     }
     
     func setErrorMessage(alert: String) {
-        DispatchQueue.main.async {
+        
+        Task{
             let alertController = UIAlertController(title: alert, message: "エラー", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "閉じる", style: .default, handler: nil))
             self.present(alertController, animated: false, completion: nil)
         }
     }
     
+
     func setWeatherInfo(max:Int,min:Int,weather:String) {
         var imageName = "sunny"
         var tintColor = UIColor.red
@@ -82,12 +96,10 @@ class ViewController: UIViewController {
             break
         }
         
-        DispatchQueue.main.async {
             self.WeatherImageView.image = UIImage(named: imageName)
             self.WeatherImageView.tintColor = tintColor
             self.maxTempLabel.text = String(max)
             self.minTempLabel.text = String(min)
             self.indicator.stopAnimating()
-        }
     }
 }
