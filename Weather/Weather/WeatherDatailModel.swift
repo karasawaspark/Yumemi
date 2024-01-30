@@ -11,8 +11,8 @@ import Foundation
 //YumemiWeatherのAPIをインポートした
 
 struct infoWeather: Codable{
-    var area:String;
-    var date:String;
+    var area: String
+    var date: String
 }
 
 struct WeatherResponse: Codable {

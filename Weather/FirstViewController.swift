@@ -21,8 +21,6 @@ class FirstViewController: UIViewController {
         self.performSegue(withIdentifier: "toMain", sender: self)
         
     }
-    
-    
 }
 
 /*
