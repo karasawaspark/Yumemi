@@ -28,6 +28,20 @@ class ViewController: UIViewController {
             name: UIApplication.willEnterForegroundNotification,object: nil)
         
         showInfo()
+        
+        if let areaName = detailAreas?.area {
+            self.title = "\(areaName)"
+        }else{
+            print("error")
+        }
+        
+        /*navigationItem.title = area?.area.rawValue
+        or
+         if let areaName = area?.area {
+         navigationItem.title = areaName.rawValue  rawValueはエリアの中の全てのこと
+         }
+        */
+        
     }
     
     func showInfo() {

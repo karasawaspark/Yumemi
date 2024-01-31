@@ -12,7 +12,6 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
     @IBOutlet weak var weatherListTableView: UITableView!
     @IBOutlet weak var firstIndicator: UIActivityIndicatorView!
     
-    
     let weatherDatailList = WeatherDetailList()
     var areas: [WeatherResponseList] = []
     //var info:String =
@@ -27,10 +26,7 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         weatherListTableView.delegate = self //StartPageViewControllerのクラスに改造した（1行目の）機能を書く。お約束の文言
         weatherListTableView.dataSource = self
-        
-        
-        
-        
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,6 +62,32 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         return areas.count
     }
     
+    /*エラー潰し
+    func refreshControl () {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(newRefreshAction), for: .valueChanged)
+    }
+    
+    @objc func  newRefreshAction() {
+        DispatchQueue.main.async {
+              self.tableView.reloadData()  //TableViewの中身を更新する場合はここでリロード処理
+              self.tableView.refreshControl?.endRefreshing()
+        
+    }
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+//    func configureRefreshControl () {
+           //RefreshControlを追加する処理
+//           tableView.refreshControl = UIRefreshControl()
+//           tableView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    
     
     func reloadWeather() {
         //self.indicator.startAnimating()
@@ -100,8 +122,11 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
             destinarionDetail.detailAreas = areas[indexPath.row]
         }
     }
-    
-    
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier  == "bmi" {
+//            if let nextBmi = segue.destination as? BmiControllerViewController {
+//               nextBmi.bmiResult = sendBmi
 
     /*
      func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
