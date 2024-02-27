@@ -7,9 +7,9 @@
 <br>　　　　（「Reload」を押すとデータの更新をする）
 <br>※ 各地の天気結果はあらかじめAPIに含まれているもの
 
-<br>【詳細】
-<br>・処理中のindicaterの画面表示
+<br>【ポイント】
 <br>・delegateを使った画面遷移
+<br>・async、awaitによる非同期処理
 <br>・APIから受け取ったJSONデータの取得
 
 <br>【工夫したところ】
