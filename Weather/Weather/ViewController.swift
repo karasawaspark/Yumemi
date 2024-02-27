@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var maxTempLabel: UILabel!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
-    let weatherDatail = WeatherDetail()
-    var detailAreas:WeatherResponseList?   //セグエの受け皿（100%変換できるかわからないのでハテナを入れている）
+    let weatherDetail = WeatherDetail()
+    var detailAreas:WeatherResponseList?
     
     @IBOutlet weak var WeatherImageView: UIImageView!
     override func viewDidLoad() {
@@ -34,15 +34,8 @@ class ViewController: UIViewController {
         }else{
             print("error")
         }
-        
-        /*navigationItem.title = area?.area.rawValue
-        or
-         if let areaName = area?.area {
-         navigationItem.title = areaName.rawValue  rawValueはエリアの中の全てのこと
-         }
-        */
-        
     }
+    
     
     func showInfo() {
         guard let area = self.detailAreas else {return}
@@ -76,7 +69,7 @@ class ViewController: UIViewController {
         self.indicator.startAnimating()
         
         Task {
-            let result = await weatherDatail.yumemiWeather()
+            let result = await weatherDetail.yumemiWeather()
             self.indicator.stopAnimating()
             
             switch result {
@@ -87,6 +80,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     
     @objc func road() {
         // weatherDatail.setYumemiWeather()
@@ -135,5 +129,3 @@ class ViewController: UIViewController {
         self.indicator.stopAnimating()
     }
 }
-
-

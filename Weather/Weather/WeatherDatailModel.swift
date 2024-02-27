@@ -8,7 +8,6 @@
 import UIKit
 import YumemiWeather
 import Foundation
-//YumemiWeatherのAPIをインポートした
 
 struct infoWeather: Codable{
     var area: String
@@ -26,27 +25,23 @@ class WeatherDetail {
         let returnJson = infoWeather(area: "Tokyo", date: "2020-04-01T12:00:00+09:00")
         
         do{
-            let encoder = JSONEncoder()//あとでデコードの作業が必要になる
+            let encoder = JSONEncoder()
             let jsonData = try encoder.encode(returnJson)
             guard let requestJson = String(data: jsonData , encoding: .utf8)else{
                 return(.failure(YumemiWeatherError.unknownError))
             }
-            //jsonを使う場合はエラーが発生しやすいのでこまめに使う
+         
             let responseWeatherCondition = try await YumemiWeather.asyncFetchWeather(requestJson)
             
             guard let jsonData = responseWeatherCondition.data(using: .utf8)else{
                 return(.failure(YumemiWeatherError.unknownError))
             }
-            
             let decoder = JSONDecoder()
             let weatherResponse = try decoder.decode(WeatherResponse.self, from: jsonData)
             return .success((weatherResponse.max_temperature,weatherResponse.min_temperature,weatherResponse.weather_condition))
-            
+
         }catch{
             return(.failure(YumemiWeatherError.unknownError))
-            //DispatchQueue.main.async {
-              //  completion(.failure(error))//
-            //}
         }
     }
 }

@@ -24,18 +24,18 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         reloadWeather()
         
-        weatherListTableView.delegate = self //StartPageViewControllerのクラスに改造した（1行目の）機能を書く。お約束の文言
+        weatherListTableView.delegate = self
+        
         weatherListTableView.dataSource = self
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let weatherList = areas[indexPath.row] //areasに入っている情報を全て取得する
-        cell.textLabel?.text = weatherList.area.rawValue //textLabelにweatherListのareaを入力する
+        let weatherList = areas[indexPath.row]
+        cell.textLabel?.text = weatherList.area.rawValue
         
-        //最高気温と最低気温を載せる
+        
         let maxTemp = weatherList.info.max_temperature
         let minTemp = weatherList.info.min_temperature
         cell.detailTextLabel?.text = "最高気温は\(maxTemp)です。最低気温は\(minTemp)です。"
@@ -62,32 +62,6 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         return areas.count
     }
     
-    /*エラー潰し
-    func refreshControl () {
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(newRefreshAction), for: .valueChanged)
-    }
-    
-    @objc func  newRefreshAction() {
-        DispatchQueue.main.async {
-              self.tableView.reloadData()  //TableViewの中身を更新する場合はここでリロード処理
-              self.tableView.refreshControl?.endRefreshing()
-        
-    }
-    */
-    
-    
-    
-    
-    
-    
-    
-    
-//    func configureRefreshControl () {
-           //RefreshControlを追加する処理
-//           tableView.refreshControl = UIRefreshControl()
-//           tableView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
-    
     
     func reloadWeather() {
         //self.indicator.startAnimating()
@@ -107,6 +81,7 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
     }
     
+    
     func showErrorList(alert: String) {
         Task{
             let alertController = UIAlertController(title: alert, message: "エラー", preferredStyle: .alert)
@@ -115,6 +90,7 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetail",
            let indexPath = weatherListTableView.indexPathForSelectedRow,
@@ -122,39 +98,4 @@ class StartPageViewController: UIViewController,UITableViewDelegate,UITableViewD
             destinarionDetail.detailAreas = areas[indexPath.row]
         }
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier  == "bmi" {
-//            if let nextBmi = segue.destination as? BmiControllerViewController {
-//               nextBmi.bmiResult = sendBmi
-
-    /*
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     
-     let cell =
-     return areas.count
-     
-     */
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
-
-/*
- タスクで成功の時は
- → 完了
- テーブルビューの数を設定テーブルに表を出す
- 
- 何を表示するか
- インデックスパす、テキストラベ
- */
