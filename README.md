@@ -9,7 +9,7 @@
 
 <br>【ポイント】
 <br>・delegateを使った画面データの引き継ぎ
-<br>・APIおよびJSONデータの取得
+<br>・APIおよびJSONデータの利用
 <br>・async、awaitによる非同期処理
 
 <br>【工夫したところ】
