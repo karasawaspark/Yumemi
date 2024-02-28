@@ -8,7 +8,7 @@
 <br>※各地の天気情報はパッケージ化された擬似APIを利用したものである
 
 <br>【ポイント】
-<br>・delegateを使った画面データの引き継ぎ
+<br>・delegateを使ったデータの引き継ぎ
 <br>・APIおよびJSONデータの利用
 <br>・async、awaitによる非同期処理
 
